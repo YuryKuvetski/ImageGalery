@@ -2,9 +2,17 @@
 
 <html>
 	<head>
-		
-	</head>>
+		<title>Image Galery</title>
+		<script type="text/javascript" src="js\image-galery.js"></script>
+	</head>
 	<body>
-		Hello World!
+		<script type="text/javascript">
+			var imageGalery = new ImageGalery({
+				rows: 2,
+				columns: 3,
+				width: document.body.clientWidth
+			});
+			document.body.appendChild(imageGalery.getElem());
+		</script>
 	</body>
 </html>
