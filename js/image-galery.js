@@ -1,16 +1,17 @@
 function ImageGalery(options) {
   var elem,
-      columns = options.columns | 3,
-      rows = options.rows | 2,
-      width = options.width | 720,
-      urlThumbnailField,
-      urlOriginalField,
+      columns = options.columns || 3,
+      rows = options.rows || 2,
+      width = options.width || 720,
+      flickrThumbnailSizeLetter,
+      flickrOriginalSizeLetter,
       SMAL_IMAGE_SIZE = 100,
       SMAL_IMAGE_FLICKR_LETTER = 't',
       MEDIUM_IMAGE_SIZE = 240,
       MEDIUM_IMAGE_FLICKR_LETTER = 'm',
       LARGE_IMAGE_SIZE = 640,
       LARGE_IMAGE_FLICKR_LETTER = 'z',
+      VERYLARGE_IMAGE_SIZE = 800,
       VERYLARGE_IMAGE_FLICKR_LETTER = 'c';
 
   function getElem() {
@@ -36,18 +37,28 @@ function ImageGalery(options) {
   }
 
   function renderItems() {
-    var items = getImages();
-    items.forEach(function(item) {
-      var thumbnail = document.createElement('img');
-      thumbnail.src = item.thumbnail;
-      elem.appendChild(thumbnail);
-    });
+    var items = getImages(),
+        itemIndex = 0;
+
+    for (var i = 0; i < rows; i++) {
+      var row = document.createElement('div');
+      row.className = 'image-galery__row';
+      for (var j = 0; j < columns; j++) {
+        var image = document.createElement('img');
+        image.className = 'image-galery__item';
+        image.src = items[itemIndex].thumbnail;
+        image.style.flex = items[itemIndex].thumbnailWidth;
+        row.appendChild(image);
+        itemIndex++;
+      }
+      elem.appendChild(row);
+    }
   }
 
   function getImages() {
-    urlThumbnailField = 'url_' + calcFlickrImageSize(width / columns);
-    urlOriginalField = 'url_' + calcFlickrImageSize(width);
-    var extras = urlThumbnailField + ', ' + urlOriginalField;
+    flickrThumbnailSizeLetter = calcFlickrImageSize(width / columns);
+    flickrOriginalSizeLetter = calcFlickrImageSize(width);
+    var extras = 'url_' + flickrThumbnailSizeLetter + ', url_' + flickrOriginalSizeLetter;
     var perPage = rows * columns;
     var page = 1;
     var rawUrl = 'https://api.flickr.com/services/rest/' +
@@ -58,10 +69,11 @@ function ImageGalery(options) {
   }
 
   function calcFlickrImageSize(width) {
-    if (width < SMAL_IMAGE_SIZE) return SMAL_IMAGE_FLICKR_LETTER;
-    if (width < MEDIUM_IMAGE_SIZE) return MEDIUM_IMAGE_FLICKR_LETTER;
-    if (width < LARGE_IMAGE_SIZE) return LARGE_IMAGE_FLICKR_LETTER;
-    return VERYLARGE_IMAGE_FLICKR_LETTER;
+    if (width > VERYLARGE_IMAGE_SIZE) return VERYLARGE_IMAGE_FLICKR_LETTER;
+    if (width > LARGE_IMAGE_SIZE) return LARGE_IMAGE_FLICKR_LETTER;
+    if (width > MEDIUM_IMAGE_SIZE) return MEDIUM_IMAGE_FLICKR_LETTER;
+    if (width > SMAL_IMAGE_SIZE) return SMAL_IMAGE_FLICKR_LETTER;
+    return SMAL_IMAGE_FLICKR_LETTER;
   }
 
   function getPhotosFromFlickr(rawUrl) {
@@ -82,8 +94,10 @@ function ImageGalery(options) {
     for(i = 0; i < flickrPhotos.length; i++) {
         photo = {
           title: flickrPhotos[i]['title'],
-          thumbnail: flickrPhotos[i][urlThumbnailField],
-          original: flickrPhotos[i][urlOriginalField]
+          thumbnail: flickrPhotos[i]['url_' + flickrThumbnailSizeLetter],
+          thumbnailWidth: flickrPhotos[i]['width_' + flickrThumbnailSizeLetter],
+          original: flickrPhotos[i]['url_' + flickrOriginalSizeLetter],
+          originalWidth: flickrPhotos[i]['width_' + flickrOriginalSizeLetter]
         };
         photos.push(photo);
     }
