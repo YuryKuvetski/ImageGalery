@@ -1,2 +1,2 @@
-# ImageGalery
+# ImageGallery
 andersen first task
