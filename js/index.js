@@ -1,9 +1,9 @@
-(function (angular) {
+(function () {
 	'use strict';
-	angular.module('FirstTaskApp', [])
+	window.angular.module('FirstTaskApp', [])
 		.controller('FirstTaskCtrl', function () {
-		  var ctrl = this;
-		  ctrl.photos = getImages();
+		  var vm = this;
+		  vm.photos = getImages();
 
 		  function getImages() {
 		  	var NUMBER_PHOTOS = 6;
@@ -69,12 +69,11 @@
 		    				width: flickrPhoto['width_' + postfix] || 0,
 		    				height: flickrPhoto['height_' + postfix] || 0
 		    			};
-		    		} 
-		    		return undefined;
+		    		}
 		    	}
 		    }
 		  }
 
 
 		});
-})(window.angular)
+})()

@@ -1,6 +1,6 @@
-(function (angular) {
+(function () {
   'use strict';
-  angular.module('FirstTaskApp')
+  window.angular.module('FirstTaskApp')
     .component('imageGallery', {
       templateUrl: 'imageGallery.html',
       controller: ImageGalleryCtrl,
@@ -8,7 +8,6 @@
         photos: '='
       }
     });
-})(window.angular)
 
 function ImageGalleryCtrl() {
   var ctrl = this;
@@ -27,3 +26,4 @@ function ImageGalleryCtrl() {
       })[0].index;
   })();
 }
+})()
