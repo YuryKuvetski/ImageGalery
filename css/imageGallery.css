@@ -3,5 +3,17 @@
 }
 
 .image-gallery__item {
-	margin: 5px;
+	margin-right: 5px;
 }
+
+.image-gallery__image {
+  object-fit: cover;
+  width: 100%;
+  height: 40vh;
+  border-radius: 10px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+}
+	.image-gallery__image:hover {
+		opacity: 1;
+	}

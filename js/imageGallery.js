@@ -3,24 +3,6 @@
   angular.module('FirstTaskApp')
     .component('imageGallery', {
       templateUrl: 'imageGallery.html',
-      /*template:
-        '<div ng-hide="$ctrl.photos">' +
-          'Photos not loaded... ' +
-        '</div>' +
-        '<div ng-show="$ctrl.photos">' +
-          'ThumbnailSize = {{$ctrl.thumbnailSize}}' +
-
-          '<div class="image-gallery__row">' +
-            '<a ng-repeat="photo in $ctrl.photos | limitTo:3:0" ng-href="#{{$index}}" class="image-gallery__item">' +
-              '<img  ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" alt="{{photo.title}}"> ' +
-            '</a>' +
-          '</div>' +
-          '<div class="image-gallery__row">' +
-            '<a ng-repeat="photo in $ctrl.photos | limitTo:3:2" ng-href="#{{$index}}" class="image-gallery__item">' +
-              '<img  ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" alt="{{photo.title}}"> ' +
-            '</a>' +
-          '</div>' +
-        '</div>',*/
       controller: ImageGalleryCtrl,
       bindings: {
         photos: '='
@@ -30,5 +12,18 @@
 
 function ImageGalleryCtrl() {
   var ctrl = this;
-  ctrl.thumbnailSize = 1;
+
+  ctrl.showImage = function(imageIndex) {
+    alert(imageIndex);
+  };
+
+  (function calcThumbnailSize() {
+    var SIZES = [75, 100, 150, 240, 320, 640, 800, 1024];
+    var thumbnailWidth = document.body.clientWidth / 3;
+    ctrl.thumbnailSize = SIZES.map(function (val, i){
+        return {value:Math.abs(val - thumbnailWidth),index:i}; 
+      }).sort(function(a, b) {
+        return a.value - b.value;
+      })[0].index;
+  })();
 }

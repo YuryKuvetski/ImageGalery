@@ -2,16 +2,20 @@
 	Photos not loaded... 
 </div>
 <div ng-show="$ctrl.photos">
-	ThumbnailSize = {{$ctrl.thumbnailSize}}
-
 	<div class="image-gallery__row">
-		<a ng-repeat="photo in $ctrl.photos | limitTo:3:0" ng-href="#{{$index}}" class="image-gallery__item">
-			<img  ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" alt="{{photo.title}}">	
-		</a>
+		<div ng-repeat="photo in $ctrl.photos | limitTo:3:0"
+			class="image-gallery__item" 
+			ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
+			ng-click="$ctrl.showImage($index)">
+			<img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" alt="{{photo.title}}" class="image-gallery__image">	
+		</div>
 	</div>
 	<div class="image-gallery__row">
-		<a ng-repeat="photo in $ctrl.photos | limitTo:3:2" ng-href="#{{$index}}" class="image-gallery__item">
-			<img  ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" alt="{{photo.title}}">	
-		</a>
+		<div ng-repeat="photo in $ctrl.photos | limitTo:3:3"
+			class="image-gallery__item" 
+			ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
+			ng-click="$ctrl.showImage($index + 3)">
+			<img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" alt="{{photo.title}}" class="image-gallery__image">	
+		</div>
 	</div>
 </div>

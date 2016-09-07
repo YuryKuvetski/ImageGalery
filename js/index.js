@@ -42,7 +42,7 @@
 		    return photos;
 
 		    function getPhotoUrls(flickrPhoto) {
-		    	var FLICKR_SIZE_POSTFIX = ['sq', 't', 's', 'q', 'm', 'n', 'z', 'c', 'l', 'o'];
+		    	var FLICKR_SIZE_POSTFIX = ['sq', 't', 'q', 's', 'n', 'z', 'c', 'l', 'o'];
 		    	var lastPhotoUrl = findFirstFlickrUrl(flickrPhoto);
 		    	var photoUrl;
 		    	var result = [];
