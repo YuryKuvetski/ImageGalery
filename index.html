@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<title>Image Galery</title>
-		<link rel="stylesheet" type="text/css" href="css\imageGallery.css">
+  <head>
+    <title>Image Galery</title>
+    <link rel="stylesheet" type="text/css" href="css\imageGallery.css">
 
-	</head>
-	<body ng-app="FirstTaskApp">
-			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-		<script type="text/javascript" src="js\index.js"></script>
-		<script type="text/javascript" src="js\imageGallery.js"></script>
-		<div ng-controller="FirstTaskCtrl as ctrl">
-			<image-gallery photos="ctrl.photos"></image-gallery>
-		</div>
-	</body>
+  </head>
+  <body ng-app="ImageGalleryApp">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="js\imageGallery.component.module.js"></script>
+    <script type="text/javascript" src="js\main.service.module.js"></script>
+    <script type="text/javascript" src="js\main.component.module.js"></script>
+    <script type="text/javascript" src="js\main.module.js"></script>
+    <main-component></main-component>
+  </body>
 </html>
