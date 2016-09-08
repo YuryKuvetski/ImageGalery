@@ -1,14 +1,18 @@
 (function() {
   'use strict';
-  window.angular.module('MainComponentModule', ['MainServiceModule', 'ImageGalleryComponentModule'])
-    .component('mainComponent', {
+  angular.module('MainComponentModule', ['MainServiceModule', 
+  	'ImageGalleryComponentModule', 'ImageGalleryDirectiveModule'])
+    .component('main', {
       templateUrl: 'imageGalleryComponent.html',
       controller: mainComponentCntrl,
     });
 
   function mainComponentCntrl(flickr) {
     var vm = this;
-    vm.photos = flickr.getImages();
+
+    flickr.getImages(function(data) {
+    	vm.photos = data;
+    });
   }
 
 })()

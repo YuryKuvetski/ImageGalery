@@ -1,4 +1,4 @@
 (function() {
   'use strict';
-  window.angular.module('ImageGalleryApp', ['MainComponentModule']);
+  angular.module('ImageGalleryApp', ['MainComponentModule']);
 })()

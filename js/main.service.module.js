@@ -1,27 +1,24 @@
 (function() {
   'use strict';
-  window.angular.module('MainServiceModule', [])
-    .service('flickr', function() {
-      this.getImages = function() {
+  angular.module('MainServiceModule', [])
+    .service('flickr', function($http) {
+      this.getImages = function(callback) {
         var NUMBER_PHOTOS = 6;
         var rawUrl = 'https://api.flickr.com/services/rest/' +
           '?method=flickr.photos.getRecent&api_key=5ce64d83cff5e9200bdbb2deff8f1ba9' +
           '&extras=url_sq, url_t, url_s, url_q, url_m, url_n, url_z, url_c, url_l, url_o' + 
           '&per_page=' + NUMBER_PHOTOS + '&page=1&format=json&nojsoncallback=1';
-        return getPhotosFromFlickr(rawUrl);
-      };
 
-      function getPhotosFromFlickr(rawUrl) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", rawUrl, false);
-        xmlhttp.send();
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200){
-          var flickrPhotos = JSON.parse(xmlhttp.responseText)['photos']['photo'];
-          return decorateFlickrPhotos(flickrPhotos);
-        } else {
-          alert("Flickr service request error...");
-          return [];
-        }
+        $http({
+				  method: 'GET',
+				  url: rawUrl
+				}).then(function successCallback(response) {
+				    var flickrPhotos = response.data.photos.photo;
+				    callback(decorateFlickrPhotos(flickrPhotos) || []);
+				  }, function errorCallback(response) {
+				    alert("Flickr service request error...");
+          	callback([]);
+			  	});
 
         function decorateFlickrPhotos(flickrPhotos) {
           var photo;
@@ -69,8 +66,6 @@
             }
           }
         }
-      }
-
-      
+      };
     });
 })();
