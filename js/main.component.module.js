@@ -1,9 +1,8 @@
 (function() {
   'use strict';
-  angular.module('MainComponentModule', ['MainServiceModule', 
-  	'ImageGalleryComponentModule', 'ImageGalleryDirectiveModule'])
-    .component('main', {
-      templateUrl: 'imageGalleryComponent.html',
+  angular.module('MainComponentModule', ['MainServiceModule', 'ImageGalleryComponentModule'])
+    .component('mainApp', {
+      templateUrl: 'mainComponent.html',
       controller: mainComponentCntrl,
     });
 
