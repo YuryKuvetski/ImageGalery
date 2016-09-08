@@ -1,9 +1,9 @@
 .image-gallery__row {
-	display: flex;
+  display: flex;
 }
 
 .image-gallery__item {
-	margin-right: 5px;
+  margin-right: 5px;
 }
 
 .image-gallery__image {
@@ -14,6 +14,6 @@
   opacity: 0.8;
   transition: opacity 0.2s ease-in-out;
 }
-	.image-gallery__image:hover {
-		opacity: 1;
-	}
+  .image-gallery__image:hover {
+    opacity: 1;
+  }
