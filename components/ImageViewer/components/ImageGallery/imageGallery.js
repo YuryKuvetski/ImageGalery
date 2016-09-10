@@ -1,19 +1,20 @@
 (function() {
   'use strict';
-  angular.module('ImageGalleryComponentModule', [])
+  angular.module('ImageGallery', ['FlickrApi'])
     .component('imageGallery', {
-      templateUrl: 'imageGalleryComponent.html',
-      controller: imageGalleryComponentCtrl,
-      bindings: {
-        photos: '='
-      }
+      templateUrl: 'components/ImageViewer/components/ImageGallery/imageGallery.html',
+      controller: imageGalleryCtrl
     });
 
-  function imageGalleryComponentCtrl() {
+  function imageGalleryCtrl(flickrApi) {
     var vm = this;
 
     vm.$postLink = calcThumbnailSize;
     vm.showImage = showImage;
+    
+    flickrApi.getImages().then(function(data) {
+      vm.photos = data;  
+    });
 
     function calcThumbnailSize() {
       var SIZES = [75, 100, 150, 240, 320, 640, 800, 1024];
@@ -33,4 +34,4 @@
       alert(imageIndex);
     };
   }
-})()
+})();

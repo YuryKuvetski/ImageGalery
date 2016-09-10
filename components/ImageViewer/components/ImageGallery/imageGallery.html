@@ -1,0 +1,25 @@
+<div class="image-viewer__image-gallery__row">
+  <a ng-repeat="photo in $ctrl.photos | limitTo:3:0"
+    class="image-viewer__image-gallery__item" 
+    ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
+    ui-sref="imageView({id: $index})">
+    
+    <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
+      alt="{{photo.title}}" 
+      class="image-viewer__image-gallery__image">
+  
+  </a>
+</div>
+
+<div class="image-viewer__image-gallery__row">
+  <a ng-repeat="photo in $ctrl.photos | limitTo:3:3"
+    class="image-viewer__image-gallery__item" 
+    ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
+    ui-sref="imageView({id: $index+3})">
+
+    <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
+      alt="{{photo.title}}" 
+      class="image-viewer__image-gallery__image">
+
+  </a>
+</div>

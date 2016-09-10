@@ -3,16 +3,19 @@
 <html>
   <head>
     <title>Image Galery</title>
-    <link rel="stylesheet" type="text/css" href="css\imageGallery.css">
+    <link rel="stylesheet" type="text/css" href="components\ImageViewer\components\ImageView\imageView.css">
+    <link rel="stylesheet" type="text/css" href="components\ImageViewer\components\ImageGallery\imageGallery.css">
 
   </head>
-  <body ng-app="ImageGalleryApp">
-    <main-app></main-app>
+  <body ng-app="ImageViewer">
+
+    <image-viewer></image-viewer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script type="text/javascript" src="js\imageGallery.component.module.js"></script>
-    <script type="text/javascript" src="js\main.service.module.js"></script>
-    <script type="text/javascript" src="js\main.component.module.js"></script>
-    <script type="text/javascript" src="js\main.module.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="components/ImageViewer/components/ImageView/imageView.js"></script>
+    <script type="text/javascript" src="components/ImageViewer/components/ImageGallery/imageGallery.js"></script>
+    <script type="text/javascript" src="components/ImageViewer/services/flickrApi.js"></script>
+    <script type="text/javascript" src="components/ImageViewer/imageViewer.js"></script>
   </body>
 </html>

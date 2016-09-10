@@ -1,0 +1,15 @@
+<div class="image-viewer__image-view__container">
+
+  <div ui-sref="imageView({id: $ctrl.id-1})" class="image-viewer__image-view__nav-button">
+    Prev
+  </div>
+
+  <img ng-src="{{$ctrl.photo.urls[$ctrl.photo.urls.length-1].url}}" 
+    alt="{{$ctrl.photo.title}}" 
+    class="image-viewer__image-view__image"
+    ui-sref="imageGallery">
+
+  <div ui-sref="imageView({id: $ctrl.id+1})" class="image-viewer__image-view__nav-button">
+    Next
+  </div>
+</div>

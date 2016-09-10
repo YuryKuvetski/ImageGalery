@@ -1,2 +1,2 @@
-# ImageGallery
+# ImageViewer
 andersen first task
