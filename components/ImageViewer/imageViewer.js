@@ -9,21 +9,16 @@
       $stateProvider
         .state({
           name: 'imageView',
-          url: '/imageViewer/{id:int}',
-          template: '<image-view></image-view>',
-          resolve: {
-            photoId: function($stateParams, flickrApi) {
-              flickrApi.setSelectedPhotoId($stateParams.id);
-            }
-          }
+          url: '/imageViewer/imageView',
+          template: '<image-view></image-view>'
         })
         .state({
           name: 'imageGallery',
-          url: '/imageViewer',
+          url: '/imageViewer/imageGallery',
           template: '<image-gallery></image-gallery>'
         });
 
-      $urlRouterProvider.when('', '/imageViewer');
+      $urlRouterProvider.otherwise('/imageViewer/imageGallery');
     });
 
   function imageViewerCtrl() {
