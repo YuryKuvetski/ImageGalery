@@ -2,8 +2,9 @@
   <a ng-repeat="photo in $ctrl.photos | limitTo:3:0"
     class="image-viewer__image-gallery__item" 
     ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
-    ui-sref="imageView({id: $index})">
-    
+    ui-sref="imageView"
+    ng-click="$ctrl.flickrApi.setSelectedPhotoId($index);">
+
     <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
       alt="{{photo.title}}" 
       class="image-viewer__image-gallery__image">
@@ -15,7 +16,8 @@
   <a ng-repeat="photo in $ctrl.photos | limitTo:3:3"
     class="image-viewer__image-gallery__item" 
     ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
-    ui-sref="imageView({id: $index+3})">
+    ui-sref="imageView"
+    ng-click="$ctrl.flickrApi.setSelectedPhotoId($index+3);">
 
     <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
       alt="{{photo.title}}" 

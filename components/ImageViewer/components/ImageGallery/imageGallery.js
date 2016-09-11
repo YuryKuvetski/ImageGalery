@@ -9,6 +9,7 @@
   function imageGalleryCtrl(flickrApi) {
     var vm = this;
 
+    vm.flickrApi = flickrApi;
     vm.$postLink = calcThumbnailSize;
     vm.showImage = showImage;
     
