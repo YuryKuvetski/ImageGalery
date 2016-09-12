@@ -1,38 +1,35 @@
 (function() {
   'use strict';
   angular.module('ImageGallery', ['FlickrApi'])
-    .component('imageGallery', {
-      templateUrl: 'components/ImageViewer/components/ImageGallery/imageGallery.html',
-      controller: imageGalleryCtrl
-    });
+    .directive('imageGallery', imageGalleryDirective);
 
-  function imageGalleryCtrl(flickrApi, $element) {
-    var vm = this;
+    function imageGalleryDirective(flickrApi) {
+      return {
+        templateUrl: 'components/ImageViewer/components/ImageGallery/imageGallery.html',
+        link: imageGalleryDirectiveLink
+      }
 
-    vm.flickrApi = flickrApi;
-    vm.$postLink = calcThumbnailSize;
-    vm.showImage = showImage;
-    
-    flickrApi.getImages().then(function(data) {
-      vm.photos = data;  
-    });
+      function imageGalleryDirectiveLink(scope, element, attrs) {
+        scope.flickrApi = flickrApi;
+        scope.thumbnailSize = calcThumbnailSize();
+        
+        flickrApi.getImages().then(function(data) {
+          scope.photos = data;  
+        });
 
-    function calcThumbnailSize() {
-      var SIZES = [75, 100, 150, 240, 320, 640, 800, 1024];
-      var thumbnailWidth = document.body.clientWidth / 3;
-      
-      vm.thumbnailSize = SIZES.map(function (val, i){
-        return {
-          value:Math.abs(val - thumbnailWidth),
-          index:i
-        }; 
-      }).sort(function(a, b) {
-        return a.value - b.value;
-      })[0].index;
-    };
+        function calcThumbnailSize() {
+          var SIZES = [75, 100, 150, 240, 320, 640, 800, 1024];
+          var thumbnailWidth = element[0].offsetParent.offsetWidth / 3;
 
-    function showImage(imageIndex) {
-      alert(imageIndex);
-    };
-  }
+          return SIZES.map(function (val, i){
+            return {
+              value:Math.abs(val - thumbnailWidth),
+              index:i
+            }; 
+          }).sort(function(a, b) {
+            return a.value - b.value;
+          })[0].index;
+        };
+      }
+    }  
 })();
