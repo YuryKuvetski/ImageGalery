@@ -6,7 +6,7 @@
       controller: imageGalleryCtrl
     });
 
-  function imageGalleryCtrl(flickrApi) {
+  function imageGalleryCtrl(flickrApi, $element) {
     var vm = this;
 
     vm.flickrApi = flickrApi;

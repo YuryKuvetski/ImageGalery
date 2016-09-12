@@ -1,17 +1,17 @@
-<div class="image-viewer__image-view">
-    <div class="image-viewer__image-view__arrow-prev"
+<div class="image-view-container">
+    <div class="image-view-prev-btn"
       ng-click="$ctrl.prevPhoto()">
     </div>
-    <div class="image-viewer__image-view__arrow-next"
+    <div class="image-view-next-btn"
       ng-click="$ctrl.nextPhoto()">
     </div>
 
-  <div class="image-viewer__image-view__container">
+  <div class="image-view-content">
     <img ng-repeat="photo in $ctrl.photos"
       ng-if="$index == $ctrl.id"
-      class="image-viewer__image-view__image-active"
+      class="image-view-image"
       ng-src="{{photo.urls[photo.urls.length-2].url}}" 
       alt="{{photo.title}}" 
-      ng-click="$ctrl.openOriginalImage()">
+      ng-click="$ctrl.openOriginalImage(photo)">
   </div>
 </div>

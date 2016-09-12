@@ -1,28 +1,7 @@
 (function() {
   'use strict';
-  angular.module('ImageViewer', ['FlickrApi', 'ui.router', 'ImageGallery', 'ImageView'])
+  angular.module('ImageViewer', ['ImageViewerConfig'])
     .component('imageViewer', {
-      templateUrl: 'components/ImageViewer/imageViewer.html',
-      controller: imageViewerCtrl,
-    })
-    .config(function($stateProvider, $urlRouterProvider) {
-      $stateProvider
-        .state({
-          name: 'imageView',
-          url: '/imageViewer/imageView',
-          template: '<image-view></image-view>'
-        })
-        .state({
-          name: 'imageGallery',
-          url: '/imageViewer/imageGallery',
-          template: '<image-gallery></image-gallery>'
-        });
-
-      $urlRouterProvider.otherwise('/imageViewer/imageGallery');
+      templateUrl: 'components/ImageViewer/imageViewer.html'
     });
-
-  function imageViewerCtrl() {
-    var vm = this;
-  }
-
 })();

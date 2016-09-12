@@ -1,10 +1,12 @@
 (function() {
   'use strict';
-  angular.module('ImageView', ['FlickrApi', 'ngAnimate'])
-    .component('imageView', {
+  var module = angular.module('ImageView', ['ngAnimate']);
+  module.component('imageView', {
       templateUrl: 'components/ImageViewer/components/ImageView/imageView.html',
-      controller: ['$window', 'flickrApi',imageViewCtrl]
+      controller: imageViewCtrl
     });
+
+  imageViewCtrl.$inject = ['$window', 'flickrApi'];
 
   function imageViewCtrl($window, flickrApi) {
     var vm = this;
@@ -17,8 +19,9 @@
       vm.id = flickrApi.getSelectedPhotoId() || 0; 
     });
 
-    function openOriginalImage() {
-      $window.open(vm.photos[vm.id].urls[vm.photos[vm.id].urls.length - 1].url, '_blank');
+    function openOriginalImage(photo) {
+      var urls = photo.urls;
+      $window.open(urls[urls.length - 1].url, '_blank');
     }
 
     function nextPhoto() {
