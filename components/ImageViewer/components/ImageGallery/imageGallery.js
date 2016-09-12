@@ -13,7 +13,7 @@
         scope.flickrApi = flickrApi;
         scope.thumbnailSize = calcThumbnailSize();
         
-        flickrApi.getImages().then(function(data) {
+        flickrApi.getImages(function(data) {
           scope.photos = data;  
         });
 
