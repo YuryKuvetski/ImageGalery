@@ -14,7 +14,7 @@
     vm.nextPhoto = nextPhoto;
     vm.prevPhoto = prevPhoto;
 
-    flickrApi.getImages().then(function(data) {
+    flickrApi.getImages(function(data) {
       vm.photos = data;
       vm.id = flickrApi.getSelectedPhotoId() || 0; 
     });
