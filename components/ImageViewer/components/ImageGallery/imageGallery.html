@@ -1,27 +1,27 @@
-<div class="image-viewer__image-gallery__row">
-  <a ng-repeat="photo in $ctrl.photos | limitTo:3:0"
-    class="image-viewer__image-gallery__item" 
-    ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
+<div class="image-gallery-row">
+  <a ng-repeat="photo in photos | limitTo:3:0"
+    class="image-gallery-item" 
+    ng-style="{flex: {{photo.urls[thumbnailSize].width}}}"
     ui-sref="imageView"
-    ng-click="$ctrl.flickrApi.setSelectedPhotoId($index);">
+    ng-click="flickrApi.setSelectedPhotoId($index);">
 
-    <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
+    <img ng-src="{{photo.urls[thumbnailSize].url}}" 
       alt="{{photo.title}}" 
-      class="image-viewer__image-gallery__image">
+      class="image-gallery-image">
   
   </a>
 </div>
 
-<div class="image-viewer__image-gallery__row">
-  <a ng-repeat="photo in $ctrl.photos | limitTo:3:3"
-    class="image-viewer__image-gallery__item" 
-    ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
+<div class="image-gallery-row">
+  <a ng-repeat="photo in photos | limitTo:3:3"
+    class="image-gallery-item" 
+    ng-style="{flex: {{photo.urls[thumbnailSize].width}}}"
     ui-sref="imageView"
-    ng-click="$ctrl.flickrApi.setSelectedPhotoId($index+3);">
+    ng-click="flickrApi.setSelectedPhotoId($index+3);">
 
-    <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
+    <img ng-src="{{photo.urls[thumbnailSize].url}}" 
       alt="{{photo.title}}" 
-      class="image-viewer__image-gallery__image">
+      class="image-gallery-image">
 
   </a>
 </div>
