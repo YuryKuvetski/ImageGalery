@@ -3,7 +3,7 @@
     class="image-gallery-item" 
     ng-style="{flex: {{photo.urls[thumbnailSize].width}}}"
     ui-sref="imageView"
-    ng-click="flickrApi.setSelectedPhotoId($index);">
+    ng-click="selectPhoto($index);">
 
     <img ng-src="{{photo.urls[thumbnailSize].url}}" 
       alt="{{photo.title}}" 
@@ -17,7 +17,7 @@
     class="image-gallery-item" 
     ng-style="{flex: {{photo.urls[thumbnailSize].width}}}"
     ui-sref="imageView"
-    ng-click="flickrApi.setSelectedPhotoId($index+3);">
+    ng-click="selectPhoto($index+3);">
 
     <img ng-src="{{photo.urls[thumbnailSize].url}}" 
       alt="{{photo.title}}" 

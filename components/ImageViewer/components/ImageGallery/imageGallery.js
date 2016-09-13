@@ -10,10 +10,10 @@
       }
 
       function imageGalleryDirectiveLink(scope, element, attrs) {
-        scope.flickrApi = flickrApi;
+        scope.selectPhoto = flickrApi.setSelectedPhotoId;
         scope.thumbnailSize = calcThumbnailSize();
         
-        flickrApi.getImages(function(data) {
+        flickrApi.getImages().then(function(data) {
           scope.photos = data;  
         });
 
