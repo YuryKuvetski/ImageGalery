@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('FlickrApi', [])
-    .factory('flickrApi', function($http, flickrPhotoDecorator) {
+    .factory('flickrApi', function($http, $q, flickrPhotoDecorator) {
       var latestLoadedPhotos;
       var selectedPhotoId;
       var NUMBER_PHOTOS = 6;
@@ -20,23 +20,23 @@
         }
       };
 
-      function getImages(callback) {
-        if (latestLoadedPhotos && latestLoadedPhotos != []){
-          callback(latestLoadedPhotos);
-          return;
+      function getImages() {
+        if (latestLoadedPhotos){
+          return $q(function(resolve, reject) {
+              resolve(latestLoadedPhotos);
+          });
         }
 
-        $http({
+        return $http({
           method: 'GET',
           url: rawUrl
         }).then(function successCallback(response) {
           var flickrPhotos = response.data.photos.photo;
           latestLoadedPhotos = flickrPhotoDecorator.decorate(flickrPhotos);
-          callback(latestLoadedPhotos);
+          return latestLoadedPhotos;
         }, function errorCallback(response) {
-          alert("Flickr service request error...");
           latestLoadedPhotos = [];
-          callback(latestLoadedPhotos);
+          return latestLoadedPhotos;
         });
       }
     });
