@@ -1,11 +1,4 @@
 <div class="image-view-container">
-    <div class="image-view-prev-btn"
-      ng-click="$ctrl.prevPhoto()">
-    </div>
-    <div class="image-view-next-btn"
-      ng-click="$ctrl.nextPhoto()">
-    </div>
-
   <div class="image-view-content">
     <img ng-repeat="photo in $ctrl.photos"
       ng-if="$index == $ctrl.id"
@@ -14,4 +7,12 @@
       alt="{{photo.title}}" 
       ng-click="$ctrl.openOriginalImage(photo)">
   </div>
+
+  <div class="image-view-prev-btn"
+    ng-click="$ctrl.prevPhoto()">
+  </div>
+  <div class="image-view-next-btn"
+    ng-click="$ctrl.nextPhoto()">
+  </div>
+
 </div>
