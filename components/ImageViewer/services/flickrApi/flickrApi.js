@@ -22,9 +22,7 @@
 
       function getImages() {
         if (latestLoadedPhotos){
-          return $q(function(resolve, reject) {
-              resolve(latestLoadedPhotos);
-          });
+          return $q.resolve(latestLoadedPhotos);
         }
 
         return $http({
