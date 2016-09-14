@@ -1,4 +1,4 @@
-<div thumbnail-size="onThumbnailSizeCalculated(value)">
+<thumbnail-size callback="$ctrl.onThumbnailSizeCalculated"></thumbnail-size>
 
 <div class="image-gallery-row">
   <a ng-repeat="photo in $ctrl.photos | limitTo:3:0"
@@ -26,6 +26,4 @@
       class="image-gallery-image">
 
   </a>
-</div>
-
 </div>

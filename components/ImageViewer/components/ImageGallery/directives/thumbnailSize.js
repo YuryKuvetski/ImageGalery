@@ -5,9 +5,9 @@
 
     function thumbnailSizeDirective() {
       return {
-        restrict: 'A',
+        restrict: 'E',
         scope: {
-          'setThumbnailSize': '&thumbnailSize'
+          'setThumbnailSize': '&callback'
         },
         link: imageGalleryDirectiveLink
       }
@@ -25,7 +25,7 @@
             return a.value - b.value;
           })[0].index;
 
-          setThumbnailSize({value:thumbnailSize});
+          scope.setThumbnailSize(thumbnailSize);
       }
     }  
 })();
