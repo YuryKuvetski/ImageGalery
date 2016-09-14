@@ -25,13 +25,14 @@
           return $q.resolve(latestLoadedPhotos);
         }
 
-        return $http.get(rawUrl)
-        .success( data => {
+        return $http({
+          method: 'GET',
+          url: rawUrl
+        }).then(function successCallback(response) {
           var flickrPhotos = response.data.photos.photo;
           latestLoadedPhotos = flickrPhotoDecorator.decorate(flickrPhotos);
           return latestLoadedPhotos;
-        }) 
-        .error(() => {
+        }, function errorCallback(response) {
           latestLoadedPhotos = [];
           return latestLoadedPhotos;
         });
