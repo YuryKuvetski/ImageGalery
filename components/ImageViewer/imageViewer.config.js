@@ -3,17 +3,24 @@
   angular.module('ImageViewerConfig', ['ui.router', 'ImageGallery', 'ImageView'])
     .config(function($stateProvider, $urlRouterProvider) {
       $stateProvider
-        .state({
-          name: 'imageView',
-          url: '/imageViewer/imageView',
-          template: '<image-view></image-view>'
+        .state('imageViewer',{
+          controller: imageViewerCtrl,
+          url: '/imageViewer',
+          template: '<ui-view></ui-view>'
         })
-        .state({
-          name: 'imageGallery',
-          url: '/imageViewer/imageGallery',
-          template: '<image-gallery></image-gallery>'
+        .state('imageViewer.imageView', {
+          template: '<image-view></image-view>',
+          url: '/imageView'
+        })
+        .state('imageViewer.imageGallery',{
+          template: '<image-gallery></image-gallery>',
+          url: '/imageGallery'
         });
 
-      $urlRouterProvider.otherwise('/imageViewer/imageGallery');
+      $urlRouterProvider.otherwise('/imageViewer');
+
+      function imageViewerCtrl($state) {
+        $state.transitionTo('imageViewer.imageGallery');
+      }
     });
 })();

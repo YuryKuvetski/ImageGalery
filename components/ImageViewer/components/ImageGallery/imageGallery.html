@@ -1,11 +1,13 @@
-<div class="image-gallery-row">
-  <a ng-repeat="photo in photos | limitTo:3:0"
-    class="image-gallery-item" 
-    ng-style="{flex: {{photo.urls[thumbnailSize].width}}}"
-    ui-sref="imageView"
-    ng-click="selectPhoto($index);">
+<div thumbnail-size="onThumbnailSizeCalculated(value)">
 
-    <img ng-src="{{photo.urls[thumbnailSize].url}}" 
+<div class="image-gallery-row">
+  <a ng-repeat="photo in $ctrl.photos | limitTo:3:0"
+    class="image-gallery-item" 
+    ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
+    ui-sref="imageView"
+    ng-click="$ctrl.selectPhoto($index);">
+
+    <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
       alt="{{photo.title}}" 
       class="image-gallery-image">
   
@@ -13,15 +15,17 @@
 </div>
 
 <div class="image-gallery-row">
-  <a ng-repeat="photo in photos | limitTo:3:3"
+  <a ng-repeat="photo in $ctrl.photos | limitTo:3:3"
     class="image-gallery-item" 
-    ng-style="{flex: {{photo.urls[thumbnailSize].width}}}"
+    ng-style="{flex: {{photo.urls[$ctrl.thumbnailSize].width}}}"
     ui-sref="imageView"
-    ng-click="selectPhoto($index+3);">
+    ng-click="$ctrl.selectPhoto($index+3);">
 
-    <img ng-src="{{photo.urls[thumbnailSize].url}}" 
+    <img ng-src="{{photo.urls[$ctrl.thumbnailSize].url}}" 
       alt="{{photo.title}}" 
       class="image-gallery-image">
 
   </a>
+</div>
+
 </div>

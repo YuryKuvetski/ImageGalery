@@ -13,19 +13,13 @@
     vm.openOriginalImage = openOriginalImage;
     vm.nextPhoto = nextPhoto;
     vm.prevPhoto = prevPhoto;
+    vm.$onInit = onInit;
 
-    flickrApi.getImages().then(function(data) {
-      vm.photos = data;
-      vm.id = flickrApi.getSelectedPhotoId() || 0; 
-    });
-
-    function openOriginalImage(photo) {
-      var urls = photo.urls;
-      $window.open(urls[urls.length - 1].url, '_blank');
-    }
-
-    function nextPhoto() {
-      vm.id = (vm.id + 1) % vm.photos.length;
+    function onInit() {
+      flickrApi.getImages().then(data => { 
+        vm.photos = data;
+        vm.id = flickrApi.getSelectedPhotoId() || 0; 
+      });
     }
 
     function prevPhoto() {
@@ -33,6 +27,15 @@
       if (vm.id - 1 < 0){
         vm.id = vm.photos.length - 1;
       }
+    }
+
+    function nextPhoto() {
+      vm.id = (vm.id + 1) % vm.photos.length;
+    }
+
+    function openOriginalImage(photo) {
+      var urls = photo.urls;
+      $window.open(urls[urls.length - 1].url, '_blank');
     }
   }
 })();
