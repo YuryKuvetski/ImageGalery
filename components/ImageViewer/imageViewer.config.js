@@ -3,7 +3,7 @@
   angular.module('ImageViewerConfig', ['ui.router', 'ImageGallery', 'ImageView'])
     .config(function($stateProvider, $urlRouterProvider) {
       $stateProvider
-        .state('imageViewer',{
+        .state('imageViewer', {
           abstract: true,
           url: '/imageViewer',
           template: '<ui-view/>'
@@ -12,7 +12,7 @@
           template: '<image-view></image-view>',
           url: '/imageView'
         })
-        .state('imageViewer.imageGallery',{
+        .state('imageViewer.imageGallery', {
           template: '<image-gallery></image-gallery>',
           url: '/imageGallery'
         });

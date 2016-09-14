@@ -25,7 +25,7 @@
             return a.value - b.value;
           })[0].index;
 
-          scope.setThumbnailSize(thumbnailSize);
+          scope.setThumbnailSize({value:thumbnailSize});
       }
     }  
 })();
