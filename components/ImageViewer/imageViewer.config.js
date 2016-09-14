@@ -4,9 +4,9 @@
     .config(function($stateProvider, $urlRouterProvider) {
       $stateProvider
         .state('imageViewer',{
-          controller: imageViewerCtrl,
+          abstract: true,
           url: '/imageViewer',
-          template: '<ui-view></ui-view>'
+          template: '<ui-view/>'
         })
         .state('imageViewer.imageView', {
           template: '<image-view></image-view>',
@@ -17,10 +17,6 @@
           url: '/imageGallery'
         });
 
-      $urlRouterProvider.otherwise('/imageViewer');
-
-      function imageViewerCtrl($state) {
-        $state.transitionTo('imageViewer.imageGallery');
-      }
+      $urlRouterProvider.otherwise('/imageViewer/imageGallery');
     });
 })();
