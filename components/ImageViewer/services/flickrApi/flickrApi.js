@@ -22,19 +22,16 @@
 
       function getImages() {
         if (latestLoadedPhotos){
-          return $q(function(resolve, reject) {
-              resolve(latestLoadedPhotos);
-          });
+          return $q.resolve(latestLoadedPhotos);
         }
 
-        return $http({
-          method: 'GET',
-          url: rawUrl
-        }).then(function successCallback(response) {
+        return $http.get(rawUrl)
+        .success( data => {
           var flickrPhotos = response.data.photos.photo;
           latestLoadedPhotos = flickrPhotoDecorator.decorate(flickrPhotos);
           return latestLoadedPhotos;
-        }, function errorCallback(response) {
+        }) 
+        .error(() => {
           latestLoadedPhotos = [];
           return latestLoadedPhotos;
         });

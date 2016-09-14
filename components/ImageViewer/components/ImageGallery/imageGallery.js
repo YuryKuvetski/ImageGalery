@@ -1,35 +1,26 @@
 (function() {
   'use strict';
-  angular.module('ImageGallery', ['FlickrApi'])
-    .directive('imageGallery', imageGalleryDirective);
+  angular.module('ImageGallery', ['FlickrApi', 'ThumbnailSize'])
+    .component('imageGallery', {
+      templateUrl: 'components/ImageViewer/components/ImageGallery/imageGallery.html',
+      controller: imageGalleryCtrl
+    });
 
-    function imageGalleryDirective(flickrApi) {
-      return {
-        templateUrl: 'components/ImageViewer/components/ImageGallery/imageGallery.html',
-        link: imageGalleryDirectiveLink
-      }
+  function imageGalleryCtrl(flickrApi) {
+    var vm = this;
 
-      function imageGalleryDirectiveLink(scope, element, attrs) {
-        scope.selectPhoto = flickrApi.setSelectedPhotoId;
-        scope.thumbnailSize = calcThumbnailSize();
-        
-        flickrApi.getImages().then(function(data) {
-          scope.photos = data;  
-        });
+    vm.selectPhoto = () => flickrApi.setSelectedPhotoId;
+    vm.$onInit = onInit;
+    vm.onThumbnailSizeCalculated = onThumbnailSizeCalculated;
 
-        function calcThumbnailSize() {
-          var SIZES = [75, 100, 150, 240, 320, 640, 800, 1024];
-          var thumbnailWidth = element[0].offsetParent.offsetWidth / 3;
+    function onInit() {
+      flickrApi.getImages().then(data => { 
+        vm.photos = data; 
+      });
+    }
 
-          return SIZES.map(function (val, i){
-            return {
-              value:Math.abs(val - thumbnailWidth),
-              index:i
-            }; 
-          }).sort(function(a, b) {
-            return a.value - b.value;
-          })[0].index;
-        };
-      }
-    }  
+    function onThumbnailSizeCalculated(value) {
+      vm.thumbnailSize = value;
+    }
+  }
 })();
