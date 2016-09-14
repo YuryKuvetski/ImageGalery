@@ -9,7 +9,7 @@
   function imageGalleryCtrl(flickrApi) {
     var vm = this;
 
-    vm.selectPhoto = () => flickrApi.setSelectedPhotoId;
+    vm.selectPhoto = selectPhoto;
     vm.$onInit = onInit;
     vm.onThumbnailSizeCalculated = onThumbnailSizeCalculated;
 
@@ -17,6 +17,10 @@
       flickrApi.getImages().then(data => { 
         vm.photos = data; 
       });
+    }
+
+    function selectPhoto(id) {
+      flickrApi.setSelectedPhotoId(id);
     }
 
     function onThumbnailSizeCalculated(value) {
