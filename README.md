@@ -1,2 +1,2 @@
 # ImageViewer
-andersen first task
+You can watch demo: https://yurykuvetski.github.io/ImageGalery
